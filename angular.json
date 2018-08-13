@@ -121,6 +121,46 @@
           }
         }
       }
+    },
+    "angular-store-lib-src": {
+      "root": "projects/angular-store-lib-src",
+      "sourceRoot": "projects/angular-store-lib-src/src",
+      "projectType": "library",
+      "prefix": "enl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/angular-store-lib-src/tsconfig.lib.json",
+            "project": "projects/angular-store-lib-src/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/angular-store-lib-src/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-store-lib-src/src/test.ts",
+            "tsConfig": "projects/angular-store-lib-src/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-store-lib-src/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/angular-store-lib-src/tsconfig.lib.json",
+              "projects/angular-store-lib-src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angular-store-lib"
