@@ -1,18 +1,21 @@
-import { Store } from './store';
+import { State } from './state';
 import { IReducer } from './Types';
 
 
-let store: Store = null;
+let store: State = null;
 
 if (store === null) {
-  store = new Store();
+  store = new State();
 }
 
 /**
  * class decorator, add reducer class to reducers array
  * @param reducerData
  */
-export const Reducer = (reducerData: IReducer) =>  {
+export const Reducer = (reducerData: IReducer) => {
+  if (reducerData.intialState === undefined) {
+    throw new Error(`IntialState of ${reducerData.key} cannot be undefined`);
+  }
   store.addReducer(reducerData);
   return function (constructor: Function) {
   };
@@ -21,10 +24,10 @@ export const Reducer = (reducerData: IReducer) =>  {
 export const Action = (type: string) => {
   return function (target: Object, propertyKey: string, descriptionKey: TypedPropertyDescriptor<Function>) {
     store.addActions({
-        type,
-        target,
-        propertyKey,
-        descriptionKey
+      type,
+      target,
+      propertyKey,
+      descriptionKey
     });
   };
 };

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Dispatch, IDispatch, Selector} from 'angular-store-lib-src';
+import { Store, IDispatch, Selector} from 'angular-store-lib-src';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ export class AppComponent {
 
   @Selector('username') $username: Observable<string>;
 
-  constructor(private di: Dispatch) {
+  constructor(private store: Store) {
 
     this.$username.pipe().subscribe((lol) => {
       console.log('username', lol);
@@ -21,7 +21,7 @@ export class AppComponent {
   }
 
   public onUpdate(username: string): void {
-    this.di.dispatch({ type: 'username', payload: username  });
+    this.store.dispatch({ type: 'username', payload: username  });
   }
 
 }

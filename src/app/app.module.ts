@@ -13,7 +13,7 @@ import { UsernameReducer } from './app.compoenent.reducer';
   imports: [
     BrowserModule,
     FormsModule,
-    StoreModule.forRoot([UsernameReducer])
+    StoreModule.forRoot([UsernameReducer], false)
   ],
   providers: [],
   bootstrap: [AppComponent]

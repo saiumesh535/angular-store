@@ -1,69 +1,17 @@
 import { Injectable } from '@angular/core';
-import { IReducer, IAction, IDispatch, IUpdateState, UpdateState, ISelector } from './Types';
-import { selectors } from './selectors';
-
-// reducer class data
-const reducers: IReducer[] = [];
-
-// actions data
-const actions: IAction[] = [];
-
-// state of the applicaiton
-const state = {};
-
+import { State } from './state';
+import { IDispatch } from './Types';
 
 @Injectable()
 export class Store {
-
-
-  constructor() { }
+  constructor(private state: State) {}
 
   /**
-   * adding reducer to array
-   * @param reducer
+   *dispatching action to
+   * @param action Action
    */
-  public addReducer(reducer: IReducer): void {
-    reducers.push(reducer);
-    // intializing state
-    this.intializeState(reducer.key, reducer.intialState);
-  }
-
-  /**
-   * adding actions to array
-   * @param action
-   */
-  public addActions(action: IAction): void {
-    actions.push(action);
-  }
-
-  /**
-   * sending payload to reducer method with payload if any
-   * @param action
-   */
-  public sendAction(data: IDispatch) {
-    // iterate through actions, array to send payload
-    actions.forEach((action) => {
-      if (action.type === data.type) {
-        action.target[action.propertyKey](data.payload, this.updatedState);
-      }
-    });
-  }
-
-  public updatedState(input: UpdateState): void {
-    // check if that key exists in state or not
-    if (state[input.key] !== undefined) {
-      state[input.key] = input.payload;
-      // iterate through Selctors
-      selectors.forEach((selector) => {
-        if (selector.key === input.key) {
-          selector.subject.next(input.payload);
-        }
-      });
-    }
-  }
-
-  private intializeState(key: string, payload: any): void {
-    state[key] = payload;
+  public dispatch(action: IDispatch): void  {
+    this.state.sendAction(action);
   }
 
 }
