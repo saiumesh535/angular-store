@@ -36,3 +36,7 @@ export interface IState {
   getState: () => any;
   updateState: (input: UpdateState) => void;
 }
+
+export interface IModuleConfig {
+  logger?: boolean;
+}

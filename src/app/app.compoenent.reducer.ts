@@ -14,7 +14,6 @@ export class UsernameReducer {
   public onUsernameChange(payload: string, state: IState): void {
     const newData = `${payload}_${new Date()}`;
     const currentState = state.getState();
-    console.log('currentState', currentState);
     state.updateState({ key: username.key, payload: newData });
   }
 

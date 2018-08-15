@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Store } from './store';
 import { State } from './state';
 import { updateLogStatus } from './Utils';
+import { IModuleConfig } from '..';
 
 @NgModule({
   declarations: [],
@@ -10,8 +11,8 @@ import { updateLogStatus } from './Utils';
   entryComponents: []
 })
 export class StoreModule {
-  static forRoot(reducerArray: any[], isProduction?: boolean): ModuleWithProviders {
-    updateLogStatus(isProduction || false);
+  static forRoot(reducerArray: any[], config?: IModuleConfig): ModuleWithProviders {
+    updateLogStatus(config.logger || false);
     return {
       ngModule: StoreModule,
       providers: [ reducerArray, Store, State ]

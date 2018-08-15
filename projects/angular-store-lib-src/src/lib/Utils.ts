@@ -1,12 +1,11 @@
-
-let isProduction = false;
+let logger = false;
 
 /**
  * updating logging status
  * @param status
  */
 export const updateLogStatus = (status: boolean) => {
-  isProduction = status;
+  logger = status;
 };
 
 
@@ -16,7 +15,7 @@ export const updateLogStatus = (status: boolean) => {
  * @param state
  */
 export const logState = (state: any) => {
-  if (!isProduction) {
-    console.log(`%c`, state,  'color: green');
+  if (logger === true) {
+    console.log('%c state', 'color: green; font-weight: bold;', state);
   }
 };
