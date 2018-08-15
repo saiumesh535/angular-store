@@ -1,8 +1,24 @@
 {
-  "name": "angular-store-lib-src",
+  "name": "angular-store",
   "version": "0.0.1",
+  "description": "Angular State management library",
+  "bugs": {
+    "url": "https://github.com/saiumesh535/angular-store/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saiumesh535/angular-store"
+  },
+  "homepage": "https://angular-store.gitbook.io/project/",
+  "keywords": [
+    "Store",
+    "state management",
+    "redux for angular"
+  ],
+  "author": "sai umesh",
+  "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+    "@angular/common": "6.0.0-rc.0 || 6.0.0",
+    "@angular/core": "6.0.0-rc.0 || 6.0.0"
   }
 }
