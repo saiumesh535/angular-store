@@ -1,4 +1,4 @@
-import { Reducer, IReducer, Action, IUpdateState } from 'angular-store-lib-src';
+import { Reducer, IReducer, Action, IUpdateState, IState } from 'angular-store-lib-src';
 
 const username: IReducer = {
   key: 'username',
@@ -11,9 +11,11 @@ export class UsernameReducer {
   constructor() {}
 
   @Action(username.key)
-  public onUsernameChange(payload: string, updateState: IUpdateState): void {
+  public onUsernameChange(payload: string, state: IState): void {
     const newData = `${payload}_${new Date()}`;
-    updateState({ key: 'username', payload: newData });
+    const currentState = state.getState();
+    console.log('currentState', currentState);
+    state.updateState({ key: username.key, payload: newData });
   }
 
 }

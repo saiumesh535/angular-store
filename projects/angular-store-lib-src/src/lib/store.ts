@@ -14,4 +14,11 @@ export class Store {
     this.state.sendAction(action);
   }
 
+  /**
+   * getting snapshot of state
+   */
+  public getSnapShot(): any {
+    return this.state.getState();
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IReducer, IAction, IDispatch, IUpdateState, UpdateState, ISelector } from './Types';
+import { IReducer, IAction, IDispatch, IUpdateState, UpdateState, ISelector, IState } from './Types';
 import { selectors } from './selectors';
 import { logState } from './Utils';
 
@@ -45,7 +45,7 @@ export class State {
     // iterate through actions, array to send payload
     actions.forEach((action) => {
       if (action.type === data.type) {
-        action.target[action.propertyKey](data.payload, this.updatedState);
+        action.target[action.propertyKey](data.payload, this.getStateObject);
       }
     });
   }
@@ -63,6 +63,23 @@ export class State {
         }
       });
     }
+  }
+
+  /**
+   * sending whole state
+   */
+  public getState() {
+    return state;
+  }
+
+  /**
+   * sending get and update state object to reducer
+   */
+  private get getStateObject(): IState {
+    return {
+      getState: this.getState,
+      updateState: this.updatedState
+    };
   }
 
   private intializeState(key: string, payload: any): void {

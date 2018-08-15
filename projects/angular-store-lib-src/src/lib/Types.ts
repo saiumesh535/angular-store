@@ -31,3 +31,8 @@ export interface ISelector {
 }
 
 export type IUpdateState = ({ key: string, payload: any }) => any;
+
+export interface IState {
+  getState: () => any;
+  updateState: (input: UpdateState) => void;
+}
