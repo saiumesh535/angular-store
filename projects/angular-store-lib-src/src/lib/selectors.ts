@@ -4,11 +4,10 @@ import { ISelector } from './Types';
 
 export const selectors: ISelector[] = [];
 
-
 /**
- * this is selector code
+ * returns Observable of payload when key of State Changes
+ * @param key
  */
-
 export const Selector = (key: string) => {
   const subject: Subject<any> = new Subject<any>();
   return function(target, varName) {

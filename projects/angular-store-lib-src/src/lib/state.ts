@@ -50,6 +50,10 @@ export class State {
     });
   }
 
+  /**
+   * updating State
+   * @param input
+   */
   public updatedState(input: UpdateState): void {
     // check if that key exists in state or not
     if (state[input.key] !== undefined) {

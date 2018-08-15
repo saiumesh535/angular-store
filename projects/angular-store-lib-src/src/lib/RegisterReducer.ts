@@ -21,6 +21,10 @@ export const Reducer = (reducerData: IReducer) => {
   };
 };
 
+/**
+ * registering method to recieve payload on matched type
+ * @param type
+ */
 export const Action = (type: string) => {
   return function (target: Object, propertyKey: string, descriptionKey: TypedPropertyDescriptor<Function>) {
     store.addActions({

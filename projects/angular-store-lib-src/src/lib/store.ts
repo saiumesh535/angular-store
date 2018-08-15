@@ -7,7 +7,8 @@ export class Store {
   constructor(private state: State) {}
 
   /**
-   *dispatching action to
+   * dispatching action, @Action decorator function will be called
+   * when it matches type
    * @param action Action
    */
   public dispatch(action: IDispatch): void  {
