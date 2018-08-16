@@ -2,7 +2,7 @@ import { Reducer, IReducer, Action, IUpdateState, IState } from 'angular-store-l
 
 const username: IReducer = {
   key: 'username',
-  intialState: ''
+  initialState: ''
 };
 
 

@@ -26,7 +26,7 @@ export class State {
   public addReducer(reducer: IReducer): void {
     reducers.push(reducer);
     // intializing state
-    this.intializeState(reducer.key, reducer.intialState);
+    this.intializeState(reducer.key, reducer.initialState);
   }
 
   /**
@@ -43,11 +43,13 @@ export class State {
    */
   public sendAction(data: IDispatch) {
     // iterate through actions, array to send payload
-    actions.forEach((action) => {
+    const actionsLenght = actions.length;
+    for(let i = 0; i < actionsLenght; i++) {
+      const action = actions[i];
       if (action.type === data.type) {
         action.target[action.propertyKey](data.payload, this.getStateObject);
       }
-    });
+    }
   }
 
   /**
@@ -60,12 +62,14 @@ export class State {
       state[input.key] = input.payload;
       // show updated state in color in console
       logState(state);
-      // iterate through Selctors
-      selectors.forEach((selector) => {
-        if (selector.key === input.key) {
+      // iterate through Selctors ans send values
+      const selectorLenght = selectors.length;
+      for(let i = 0; i < selectorLenght; i++) {
+        const selector = selectors[i];
+        if(selector.key === input.key){
           selector.subject.next(input.payload);
         }
-      });
+      }
     }
   }
 

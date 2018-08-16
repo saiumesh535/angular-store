@@ -2,7 +2,7 @@ import { Subject } from 'rxjs';
 
 export interface IReducer {
   key: string;
-  intialState: any;
+  initialState: any;
 }
 
 export interface IAction {

@@ -10,7 +10,7 @@ interface User {
 
 const password: IReducer = {
   key: 'password',
-  intialState: {
+  initialState: {
     username: null,
     id: null,
     token: null

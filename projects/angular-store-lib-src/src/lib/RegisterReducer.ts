@@ -13,8 +13,8 @@ if (store === null) {
  * @param reducerData
  */
 export const Reducer = (reducerData: IReducer) => {
-  if (reducerData.intialState === undefined) {
-    throw new Error(`IntialState of ${reducerData.key} cannot be undefined`);
+  if (reducerData.initialState === undefined) {
+    throw new Error(`initialState of ${reducerData.key} cannot be undefined`);
   }
   store.addReducer(reducerData);
   return function (constructor: Function) {
