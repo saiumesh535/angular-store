@@ -4,7 +4,7 @@ let logger = false;
  * updating logging status
  * @param status
  */
-export const updateLogStatus = (status: boolean) => {
+export function updateLogStatus(status: boolean) {
   logger = status;
 };
 

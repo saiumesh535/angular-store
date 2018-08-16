@@ -12,10 +12,12 @@ import { IModuleConfig } from '..';
 })
 export class StoreModule {
   static forRoot(reducerArray: any[], config?: IModuleConfig): ModuleWithProviders {
-    updateLogStatus(config.logger || false);
     return {
       ngModule: StoreModule,
-      providers: [ reducerArray, Store, State ]
+      providers: [ {
+        provide: 'config',
+        useValue: config
+      },reducerArray, Store, State ]
     };
   }
 }

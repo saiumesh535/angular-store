@@ -5,14 +5,14 @@ import { IReducer } from './Types';
 let store: State = null;
 
 if (store === null) {
-  store = new State();
+  store = new State(null);
 }
 
 /**
  * class decorator, add reducer class to reducers array
  * @param reducerData
  */
-export const Reducer = (reducerData: IReducer) => {
+export function Reducer (reducerData: IReducer) {
   if (reducerData.initialState === undefined) {
     throw new Error(`initialState of ${reducerData.key} cannot be undefined`);
   }
@@ -25,8 +25,8 @@ export const Reducer = (reducerData: IReducer) => {
  * registering method to recieve payload on matched type
  * @param type
  */
-export const Action = (type: string) => {
-  return function (target: Object, propertyKey: string, descriptionKey: TypedPropertyDescriptor<Function>) {
+export function Action (type: string){
+  const wtf  = function (target: Object, propertyKey: string, descriptionKey: TypedPropertyDescriptor<Function>) {
     store.addActions({
       type,
       target,
@@ -34,6 +34,7 @@ export const Action = (type: string) => {
       descriptionKey
     });
   };
+  return wtf;
 };
 
 

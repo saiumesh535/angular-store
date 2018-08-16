@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { IReducer, IAction, IDispatch, IUpdateState, UpdateState, ISelector, IState } from './Types';
+import { Injectable, Inject } from '@angular/core';
+import { IReducer, IAction, IDispatch, IUpdateState, UpdateState, ISelector, IState, IModuleConfig } from './Types';
 import { selectors } from './selectors';
-import { logState } from './Utils';
+import { logState, updateLogStatus } from './Utils';
 
 // reducer class data
 const reducers: IReducer[] = [];
@@ -17,7 +17,11 @@ const state = {};
 export class State {
 
 
-  constructor() { }
+  constructor(@Inject('config') config: IModuleConfig) {
+    // updating the loggeer status
+    updateLogStatus(!!config && config.logger || false)
+   }
+
 
   /**
    * adding reducer to array
