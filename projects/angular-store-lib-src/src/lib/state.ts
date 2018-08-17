@@ -19,7 +19,7 @@ export class State {
 
   constructor(@Inject('config') config: IModuleConfig) {
     // updating the loggeer status
-    updateLogStatus(!!config && config.logger || false)
+    updateLogStatus(!!config && config.logger || false);
    }
 
 
@@ -48,7 +48,7 @@ export class State {
   public sendAction(data: IDispatch) {
     // iterate through actions, array to send payload
     const actionsLenght = actions.length;
-    for(let i = 0; i < actionsLenght; i++) {
+    for (let i = 0; i < actionsLenght; i++) {
       const action = actions[i];
       if (action.type === data.type) {
         action.target[action.propertyKey](data.payload, this.getStateObject);
@@ -68,9 +68,9 @@ export class State {
       logState(state);
       // iterate through Selctors ans send values
       const selectorLenght = selectors.length;
-      for(let i = 0; i < selectorLenght; i++) {
+      for (let i = 0; i < selectorLenght; i++) {
         const selector = selectors[i];
-        if(selector.key === input.key){
+        if (selector.key === input.key) {
           selector.subject.next(input.payload);
         }
       }
@@ -81,7 +81,7 @@ export class State {
    * sending whole state
    */
   public getState() {
-    return state;
+    return {...state};
   }
 
   /**

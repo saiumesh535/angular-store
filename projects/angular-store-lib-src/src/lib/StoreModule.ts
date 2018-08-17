@@ -17,7 +17,7 @@ export class StoreModule {
       providers: [ {
         provide: 'config',
         useValue: config
-      },reducerArray, Store, State ]
+      }, Store, State, reducerArray ]
     };
   }
 }
