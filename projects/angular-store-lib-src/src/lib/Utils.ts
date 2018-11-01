@@ -6,7 +6,7 @@ let logger = false;
  */
 export function updateLogStatus(status: boolean) {
   logger = status;
-};
+}
 
 
 

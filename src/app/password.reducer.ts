@@ -6,9 +6,14 @@ interface User {
   token: string;
 }
 
+interface ILOl {
+  key: string;
+
+}
 
 
-const password: IReducer = {
+
+const password: IReducer<User> = {
   key: 'password',
   initialState: {
     username: null,
@@ -24,7 +29,7 @@ export class PasswordReducer {
 
   @Action(password.key)
   public onUsernameChange(payload: string, state: IState): void {
-    const getCurrentState = state.getState().password as User;
+    const getCurrentState = state.getState<any>().password as User;
     const updatedData = { ...getCurrentState, username: payload };
     state.updateState({ key: password.key, payload: updatedData });
   }

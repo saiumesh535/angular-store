@@ -1,6 +1,6 @@
 import { Reducer, IReducer, Action, IUpdateState, IState } from 'angular-store-lib-src';
 
-const username: IReducer = {
+const username: IReducer<string> = {
   key: 'username',
   initialState: ''
 };
