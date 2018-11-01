@@ -1,4 +1,4 @@
-import { Reducer, IReducer, Action, IUpdateState, IState } from 'angular-store-lib-src';
+import { Reducer, IReducer, Action, IState } from 'angular-store-lib-src';
 
 interface User {
   username: string;
@@ -28,10 +28,8 @@ export class PasswordReducer {
   constructor() { }
 
   @Action(password.key)
-  public onUsernameChange(payload: string, state: IState): void {
-    const getCurrentState = state.getState<any>().password as User;
-    const updatedData = { ...getCurrentState, username: payload };
-    state.updateState({ key: password.key, payload: updatedData });
+  public onUsernameChange(passwordPayload: string, state: IState): void {
+    state.updateState({ key: password.key, payload: passwordPayload });
   }
 
 }

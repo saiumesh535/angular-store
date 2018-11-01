@@ -11,8 +11,8 @@ export class Store {
    * when it matches type
    * @param action Action
    */
-  public dispatch(action: IDispatch): void  {
-    this.state.sendAction(action);
+  public dispatch<T>(action: IDispatch<T>): void  {
+    this.state.sendAction<T>(action);
   }
 
   /**

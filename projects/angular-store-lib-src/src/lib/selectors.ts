@@ -1,5 +1,4 @@
-import { of, Observable, Subject } from 'rxjs';
-import { ISelector } from './Types';
+import { Subject } from 'rxjs';
 
 
 export const selectorsMap = new Map<string, Subject<any>>();

@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { IReducer, IAction, IDispatch, IUpdateState, UpdateState, ISelector, IState, IModuleConfig, IActionMap } from './Types';
+import { IReducer, IDispatch, UpdateState, IState, IModuleConfig, IActionMap } from './Types';
 import { logState, updateLogStatus } from './Utils';
 import { selectorsMap } from './selectors';
 
@@ -45,7 +45,7 @@ export class State {
    * sending payload to reducer method with payload if any
    * @param action
    */
-  public sendAction(data: IDispatch) {
+  public sendAction<T>(data: IDispatch<T>) {
     // iterate through actions, array to send payload
     const actionData = actionsMap.get(data.type);
     if (!!actionData) {

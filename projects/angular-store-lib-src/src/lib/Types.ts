@@ -19,22 +19,15 @@ export interface IActionMap {
 /**
  * action to reach reducer method
  */
-export interface IDispatch {
+export interface IDispatch<T> {
   type: string;
-  payload: any;
+  payload: T;
 }
 
 export interface UpdateState<T> {
   key: string;
   payload: T;
 }
-
-export interface ISelector {
-  key: string;
-  subject: Subject<any>;
-}
-
-export type IUpdateState = ({ key: string, payload: any }) => any;
 
 export interface IState {
   getState: <T>() => T;
