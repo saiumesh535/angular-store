@@ -6,7 +6,7 @@ const username: IReducer<string> = {
 };
 
 
-@Reducer(username)
+@Reducer<string>(username)
 export class UsernameReducer {
   constructor() {}
 
