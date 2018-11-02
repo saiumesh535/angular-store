@@ -23,7 +23,7 @@ const password: IReducer<User> = {
 };
 
 
-@Reducer<IReducer<User>>(password)
+@Reducer<User>(password)
 export class PasswordReducer {
   constructor() { }
 

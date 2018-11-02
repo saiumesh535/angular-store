@@ -11,7 +11,7 @@ if (store === null) {
  * class decorator, add reducer class to reducers array
  * @param reducerData
  */
-export function Reducer(reducerData: IReducer<any>) {
+export function Reducer<T>(reducerData: IReducer<T>) {
   if (reducerData.initialState === undefined) {
     throw new Error(`initialState of ${reducerData.key} cannot be undefined`);
   }
