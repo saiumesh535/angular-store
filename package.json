@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "build:lib": "ng build angular-store-lib-src --prod",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

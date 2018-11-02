@@ -1,6 +1,6 @@
 {
   "name": "angular-store",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Angular State management library",
   "bugs": {
     "url": "https://github.com/saiumesh535/angular-store/issues"
@@ -19,6 +19,7 @@
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": "6.0.0-rc.0 || 6.0.0",
-    "@angular/core": "6.0.0-rc.0 || 6.0.0"
+    "@angular/core": "6.0.0-rc.0 || 6.0.0",
+    "rxjs": "6.0.0"
   }
 }

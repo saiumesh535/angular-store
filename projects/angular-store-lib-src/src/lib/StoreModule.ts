@@ -2,8 +2,9 @@ import { ModuleWithProviders, ClassProvider } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { Store } from './store';
 import { State } from './state';
-import { updateLogStatus } from './Utils';
 import { IModuleConfig } from '..';
+
+export interface Type extends Function { new (...args: any[]); }
 
 @NgModule({
   declarations: [],
@@ -11,7 +12,7 @@ import { IModuleConfig } from '..';
   entryComponents: []
 })
 export class StoreModule {
-  static forRoot(reducerArray: any[], config?: IModuleConfig): ModuleWithProviders {
+  static forRoot(reducerArray: Type[], config?: IModuleConfig): ModuleWithProviders {
     return {
       ngModule: StoreModule,
       providers: [ {

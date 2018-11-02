@@ -1,12 +1,16 @@
 import { Subject } from 'rxjs';
 
-export interface IReducer {
+export interface IReducer<T> {
   key: string;
-  initialState: any;
+  initialState: T;
 }
 
 export interface IAction {
   type: string;
+  metaData: IActionMap;
+}
+
+export interface IActionMap {
   target: Object;
   propertyKey: string;
   descriptionKey: TypedPropertyDescriptor<Function>;
@@ -15,26 +19,19 @@ export interface IAction {
 /**
  * action to reach reducer method
  */
-export interface IDispatch {
+export interface IDispatch<T> {
   type: string;
-  payload: any;
+  payload: T;
 }
 
-export interface UpdateState {
+export interface UpdateState<T> {
   key: string;
-  payload: any;
+  payload: T;
 }
-
-export interface ISelector {
-  key: string;
-  subject: Subject<any>;
-}
-
-export type IUpdateState = ({ key: string, payload: any }) => any;
 
 export interface IState {
-  getState: () => any;
-  updateState: (input: UpdateState) => void;
+  getState: <T>() => T;
+  updateState: <T>(input: UpdateState<T>) => void;
 }
 
 export interface IModuleConfig {

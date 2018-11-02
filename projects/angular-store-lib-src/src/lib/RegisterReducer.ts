@@ -1,7 +1,6 @@
 import { State } from './state';
 import { IReducer } from './Types';
 
-
 let store: State = null;
 
 if (store === null) {
@@ -12,29 +11,29 @@ if (store === null) {
  * class decorator, add reducer class to reducers array
  * @param reducerData
  */
-export function Reducer (reducerData: IReducer) {
+export function Reducer(reducerData: IReducer<any>) {
   if (reducerData.initialState === undefined) {
     throw new Error(`initialState of ${reducerData.key} cannot be undefined`);
   }
   store.addReducer(reducerData);
-  return function (constructor: Function) {
-  };
-};
+  return function(constructor: Function) {};
+}
 
 /**
  * registering method to recieve payload on matched type
  * @param type
  */
-export function Action (type: string){
-  const wtf  = function (target: Object, propertyKey: string, descriptionKey: TypedPropertyDescriptor<Function>) {
-    store.addActions({
-      type,
+export function Action(type: string) {
+  const wtf = function(
+    target: Object,
+    propertyKey: string,
+    descriptionKey: TypedPropertyDescriptor<Function>
+  ) {
+    store.addActions(type, {
       target,
       propertyKey,
       descriptionKey
     });
   };
   return wtf;
-};
-
-
+}
