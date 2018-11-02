@@ -19,11 +19,11 @@ const password: IReducer<User> = {
     username: null,
     id: null,
     token: null
-  } as User
+  }
 };
 
 
-@Reducer(password)
+@Reducer<IReducer<User>>(password)
 export class PasswordReducer {
   constructor() { }
 

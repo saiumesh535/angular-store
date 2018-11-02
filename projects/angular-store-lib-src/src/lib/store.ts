@@ -18,8 +18,8 @@ export class Store {
   /**
    * getting snapshot of state
    */
-  public getSnapShot(): any {
-    return this.state.getState();
+  public getSnapShot<T>(): T {
+    return this.state.getState<T>();
   }
 
 }

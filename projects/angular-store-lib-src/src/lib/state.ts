@@ -74,8 +74,8 @@ export class State {
   /**
    * sending whole state
    */
-  public getState(): any {
-    return {...state};
+  public getState<T>(): T {
+    return {...state} as T;
   }
 
   /**
