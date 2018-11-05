@@ -13,7 +13,18 @@ export class UsernameReducer {
   @Action(username.key)
   public onUsernameChange(payload: string, state: IState): void {
     const newData = `${payload}_${new Date()}`;
-    state.updateState({ key: username.key, payload: newData });
+    console.log('username changed username');
+    state.updateState({ key: 'username', payload: newData });
+  }
+
+  @Action('password')
+  public onPasswordChanged(passwordPayload: string, state: IState): void {
+    state.updateState({ key: 'password', payload: passwordPayload });
+  }
+
+  @Action(['username', 'password'])
+  public onAllChanges(payload: string, state: IState): void {
+    console.log('all changes', {payload});
   }
 
 }

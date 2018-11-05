@@ -32,4 +32,9 @@ export class PasswordReducer {
     state.updateState({ key: password.key, payload: passwordPayload });
   }
 
+  @Action('username')
+  public onUsernameChangedPassword(payload: string, state: IState): void {
+   console.log('username changed password');
+  }
+
 }

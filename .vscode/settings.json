@@ -27,7 +27,6 @@
   "rust.mode": "legacy",
   "rust.actionOnSave": "check",
   "vsicons.projectDetection.disableDetect": true,
-  "files.autoSave": "afterDelay",
   "git.autofetch": true,
   "workbench.colorTheme": "Cobalt2"
 }
