@@ -1,7 +1,9 @@
-import { Injectable, Inject } from '@angular/core';
-import { IReducer, IDispatch, UpdateState, IState, IModuleConfig, IActionMap, IAction } from './Types';
+import { Injectable, Inject, Injector } from '@angular/core';
+import { IReducer, IDispatch, UpdateState, IState, IModuleConfig, IActionMap, IAction, ReduxSend } from './Types';
 import { logState, updateLogStatus } from './Utils';
 import { selectorsMap } from './selectors';
+import { Observable, Subject } from 'rxjs';
+import { ReduxDevToolHelper } from './redux-devtool';
 
 // reducer class data
 const reducers: IReducer<any>[] = [];
@@ -16,11 +18,17 @@ let state = {};
 @Injectable()
 export class State {
 
+  public stateObs: Subject<ReduxSend>;
 
-  constructor(@Inject('config') config: IModuleConfig) {
+  constructor(@Inject('config') config: IModuleConfig, private _injector: Injector) {
+    if (_injector !== null) {
+      _injector.get(ReduxDevToolHelper);
+    }
+    this.stateObs = new Subject<ReduxSend>();
+    this.updatedState = this.updatedState.bind(this);
     // updating the loggeer status
     updateLogStatus(!!config && config.logger || false);
-   }
+  }
 
 
   /**
@@ -67,6 +75,13 @@ export class State {
     // check if that key exists in state or not
     if (input && input.key && state[input.key] !== undefined) {
       state = {...state, [input.key]: input.payload};
+
+      // send data to redux dev tool
+      this.stateObs.next({
+        action: input.key,
+        state
+      });
+
       // show updated state in color in console
       logState(state);
       // send data to selectors
@@ -85,6 +100,10 @@ export class State {
     return {...state} as T;
   }
 
+  public get getStateObs(): Observable<ReduxSend> {
+    return this.stateObs.asObservable();
+  }
+
   /**
    * sending get and update state object to reducer
    */
@@ -97,6 +116,10 @@ export class State {
 
   private intializeState(key: string, payload: any): void {
     state[key] = payload;
+    this.stateObs.next({
+      action: '@@Init',
+      state
+    });
   }
 
 }

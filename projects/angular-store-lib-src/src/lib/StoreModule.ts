@@ -1,8 +1,9 @@
-import { ModuleWithProviders, ClassProvider } from '@angular/core';
+import { ModuleWithProviders } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { Store } from './store';
 import { State } from './state';
 import { IModuleConfig } from '..';
+import { ReduxDevToolHelper } from './redux-devtool';
 
 export interface Type extends Function { new (...args: any[]); }
 
@@ -18,7 +19,7 @@ export class StoreModule {
       providers: [ {
         provide: 'config',
         useValue: config
-      }, Store, State, reducerArray ]
+      }, Store, State, reducerArray, ReduxDevToolHelper ]
     };
   }
 }

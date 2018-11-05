@@ -37,3 +37,13 @@ export interface IState {
 export interface IModuleConfig {
   logger?: boolean;
 }
+
+export interface ReduxDevTool {
+  init(state);
+  send(action: any, state?: any);
+}
+
+export interface ReduxSend {
+  action: string;
+  state: any;
+}
