@@ -1,7 +1,12 @@
 import { Subject } from 'rxjs';
 
+export interface ISelectorMap {
+  key: string;
+  subject: Subject<any>;
+}
 
-export const selectorsMap = new Map<string, Subject<any>>();
+
+export const selectorsMap: ISelectorMap[] = [];
 
 /**
  * returns Observable of payload when key of State Changes
@@ -9,7 +14,10 @@ export const selectorsMap = new Map<string, Subject<any>>();
  */
 export function Selector (key: string) {
   const subject: Subject<any> = new Subject<any>();
-  selectorsMap.set(key, subject );
+  selectorsMap.push({
+    key,
+    subject
+  });
   const wtf = function(target, varName) {
     Object.defineProperty(target, varName, {
       configurable: false,

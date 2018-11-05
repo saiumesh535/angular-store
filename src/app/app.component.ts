@@ -15,17 +15,20 @@ export class AppComponent {
 
   constructor(private store: Store) {
 
+    console.log('state', this.store.getSnapShot());
+
     this.$username.pipe().subscribe((lol) => {
-      // console.log('username', lol);
+      console.log('username', lol);
     });
     this.$password.pipe().subscribe((lol) => {
-      // console.log('password', lol);
+      console.log('password', lol);
     });
 
   }
 
   public onUpdate(username: string): void {
     this.store.dispatch({ type: 'username', payload: username  });
+    console.log('hey!!', this.store.getSnapShot());
   }
 
   public onPassword(password: string): void {

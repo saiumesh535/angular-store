@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { IReducer, IDispatch, UpdateState, IState, IModuleConfig, IActionMap } from './Types';
+import { IReducer, IDispatch, UpdateState, IState, IModuleConfig, IActionMap, IAction } from './Types';
 import { logState, updateLogStatus } from './Utils';
 import { selectorsMap } from './selectors';
 
@@ -7,10 +7,10 @@ import { selectorsMap } from './selectors';
 const reducers: IReducer<any>[] = [];
 
 // actions data
-const actionsMap = new Map<string, IActionMap>();
+const actionsMap: IAction[] = [];
 
 // state of the applicaiton
-const state = {};
+let state = {};
 
 
 @Injectable()
@@ -37,8 +37,13 @@ export class State {
    * adding actions to array
    * @param action
    */
-  public addActions(type: string, metaData: IActionMap): void {
-    actionsMap.set(type, metaData);
+  public addActions(types: string[], metaData: IActionMap): void {
+    for (const type of types) {
+      actionsMap.push({
+        type,
+        metaData
+      });
+    }
   }
 
   /**
@@ -47,9 +52,10 @@ export class State {
    */
   public sendAction<T>(data: IDispatch<T>) {
     // iterate through actions, array to send payload
-    const actionData = actionsMap.get(data.type);
-    if (!!actionData) {
-      actionData.target[actionData.propertyKey](data.payload, this.getStateObject);
+    for (const action of actionsMap) {
+      if (action.type === data.type) {
+        action.metaData.target[action.metaData.propertyKey](data.payload, this.getStateObject);
+      }
     }
   }
 
@@ -59,14 +65,15 @@ export class State {
    */
   public updatedState(input: UpdateState<any>): void {
     // check if that key exists in state or not
-    if (state[input.key] !== undefined) {
-      state[input.key] = input.payload;
+    if (input && input.key && state[input.key] !== undefined) {
+      state = {...state, [input.key]: input.payload};
       // show updated state in color in console
       logState(state);
       // send data to selectors
-      const selector = selectorsMap.get(input.key);
-      if (!!selector) {
-        selector.next(input.payload);
+      for (const selector of selectorsMap) {
+        if (selector.key === input.key) {
+          selector.subject.next(input.payload);
+        }
       }
     }
   }

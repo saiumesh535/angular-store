@@ -23,13 +23,14 @@ export function Reducer<T>(reducerData: IReducer<T>) {
  * registering method to recieve payload on matched type
  * @param type
  */
-export function Action(type: string) {
+export function Action(type: string | string[]) {
   const wtf = function(
     target: Object,
     propertyKey: string,
     descriptionKey: TypedPropertyDescriptor<Function>
   ) {
-    store.addActions(type, {
+    const types = typeof type === 'string' ? [type] : type;
+    store.addActions(types, {
       target,
       propertyKey,
       descriptionKey
